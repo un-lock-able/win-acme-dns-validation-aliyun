@@ -45,10 +45,13 @@ def main():
     global accessKeyId, accessSecret, client
     arg_list = sys.argv
     action = arg_list[1]
+    if action not in ["delete", "create"]:
+        print("Unknown action, script ended")
+        return
     domain = arg_list[2]
     domain_with_subdomain = arg_list[3]
     token = arg_list[4]
-    with open(os.path.join(os.path.dirname(arg_list[0]), "../../python/renewSSLScript/settings.json")) as setting_file:
+    with open(os.path.join(os.path.dirname(arg_list[0]), "./settings.json")) as setting_file:
         settings = json.loads(setting_file.read())
     accessKeyId = settings["accessKeyId"]
     accessSecret = settings["accessSecret"]
