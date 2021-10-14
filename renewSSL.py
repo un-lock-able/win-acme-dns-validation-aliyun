@@ -18,6 +18,7 @@ def add_record(domain_name, RR, value):
     request.set_DomainName(domain_name)
     request.set_RR(RR) # RR is the host name like live, www or @
     request.set_Type("TXT")
+    request.set_TTL(60)
     request.set_Value(value)
     response = client.do_action_with_exception(request)
     # print(json.loads(response))
@@ -56,7 +57,6 @@ def main():
     accessKeyId = settings["accessKeyId"]
     accessSecret = settings["accessSecret"]
     client = AcsClient(accessKeyId, accessSecret, 'cn-hangzhou')
-    # add_record("unlockableworld.com", "live", "ateststring")
     if action == "create":
         add_record(domain, domain_with_subdomain[:(len(domain_with_subdomain)-len(domain)-1)], token)
     elif action == "delete":
